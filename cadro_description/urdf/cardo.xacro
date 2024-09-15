@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<robot name="cardo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find cadro_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find cadro_description)/urdf/cardo.trans" />
+<xacro:include filename="$(find cadro_description)/urdf/cardo.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0032579068087706807 0.006021175164711509 -0.0016791583896604279" rpy="0 0 0"/>
+    <mass value="15.093163777470394"/>
+    <inertia ixx="0.103336" iyy="0.104072" izz="0.152929" ixy="-5e-06" iyz="4e-06" ixz="1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1_1">
+  <inertial>
+    <origin xyz="-0.1020444054381769 -0.0349867086487295 -0.00238170548299238" rpy="0 0 0"/>
+    <mass value="1.3392964352221832"/>
+    <inertia ixx="0.000967" iyy="0.000619" izz="0.001105" ixy="1e-06" iyz="0.000159" ixz="3e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.105378 -0.04777 -0.067125" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/lidar_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.105378 -0.04777 -0.067125" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/lidar_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_v5__1__1">
+  <inertial>
+    <origin xyz="-6.476358547345511e-06 -0.007540075460619161 1.1102320250644393e-07" rpy="0 0 0"/>
+    <mass value="1.020021601354988396"/>
+    <inertia ixx="3e-06" iyy="5e-06" izz="3e-06" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.003242 0.125033 0.077875" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/wheel_v5__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.003242 0.125033 0.077875" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/wheel_v5__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_v5_1">
+  <inertial>
+    <origin xyz="5.812810676029349e-06 0.007539421323962625 1.1102320213174366e-07" rpy="0 0 0"/>
+    <mass value="1.020021601354988396"/>
+    <inertia ixx="3e-06" iyy="5e-06" izz="3e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.003242 -0.137067 0.077875" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/wheel_v5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.003242 -0.137067 0.077875" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find cadro_description)/meshes/wheel_v5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid 21" type="fixed">
+  <origin xyz="0.105378 0.04777 0.067125" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1_1"/>
+</joint>
+
+<joint name="Revolute 22" type="continuous">
+  <origin xyz="0.003242 -0.125033 -0.077875" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_v5__1__1"/>
+  <axis xyz="-0.0 1.0 -0.0"/>
+</joint>
+
+<joint name="Revolute 23" type="continuous">
+  <origin xyz="0.003242 0.137067 -0.077875" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_v5_1"/>
+  <axis xyz="-0.0 1.0 -0.0"/>
+</joint>
+
+</robot>
